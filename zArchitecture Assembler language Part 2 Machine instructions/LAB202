@@ -1,0 +1,68 @@
+//TSOAA092 JOB 1EZ34G12,'LAB202',MSGLEVEL=(1,1),                        
+//    CLASS=E,MSGCLASS=Q,NOTIFY=&SYSUID,REGION=0M                       
+//* ADD and SUBTRACT instructions                                       
+//        JCLLIB ORDER=(D62WW.EZ34.STUDENT.PROCLIB)                     
+//STEP1   EXEC PROC=HLLASMA                                             
+//ASM.SYSIN DD *                                                        
+*********************************************************************** 
+* LAB202. For full details see the Exercise Guide.                      
+* In this lab, you will code variants of ADD and SUBTRACT that          
+* operate on whole (64-bit) registers.                                  
+*********************************************************************** 
+LAB202   CSECT ,           COMMA REQUIRED IF COMMENT ON THIS STMT       
+* Establish our base register (do not change these)                     
+         LARL  12,LAB202       Load the address of LAB202 into R12      
+         USING LAB202,12       Use R12 as base register                 
+**********************  Lab instructions ****************************** 
+* The comment lines below direct you to write different ADD             
+* or SUBTRACT instructions.                                             
+* When you want to check your instructions, submit the job.             
+* This job abends with S0C1 (operation exception). This is intended.    
+* On abend, the system displays the contents of registers.              
+* This lets you check if your instructions worked as expected.          
+                                                                        
+*********************************************************************** 
+* Part 1: Causing a overflow exception                                  
+                                                                        
+* First, we set the PSW program mask to cause an exception              
+* if there is an overflow                                               
+                                                                        
+         LHI   0,-1         Set R0 to X'FFFFFFFF'                       
+         SPM   0            Set PSW program mask                        
+                                                                        
+* Load 1,000,000,000 into R2 low half                                   
+         LFI   2,1000000000                                             
+                                                                        
+* Add R2 low half to itself 4 times                                     
+         AR    2,2          2,000,000,000 X'077359400'                  
+         AR    2,2          4,000,000,000 X'0EE6B2800'                  
+         AR    2,2          8,000,000,000 X'1DCD65000'                  
+         AR    2,2         16,000,000,000 X'3B9ACA000'                  
+                                                                        
+* Submit this job now and try to answer these questions                 
+* (answers in the Exercise Guide)                                       
+                                                                        
+* Question 1: What is the Abend code?                                   
+                                                                        
+* Question 2: What does R2 contain?                                     
+                                                                        
+* Question 3: Can you explain what happened?                            
+                                                                        
+* Part 2: Fix the problem                                               
+                                                                        
+* Go back to Part 1 and replace the LFI and AR                          
+* instructions by their 64-bit variants                                 
+                                                                        
+* Submit this job again                                                 
+                                                                        
+* Question 4: What is the Abend code?                                   
+                                                                        
+* Question 5: What does R2 contain?                                     
+**********************  End program  *********************************  
+         DC    H'0'          Invalid opcode causes abend S0C1           
+**********************  Program data  ********************************  
+* There are no data definitions in this program                         
+                                                                        
+         END                                                            
+/*                                                                      
+//                                                                      

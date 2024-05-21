@@ -1,0 +1,139 @@
+//TSOAA095 JOB 1EZ34G12,'LAB502',MSGLEVEL=(1,1),                        
+//    CLASS=E,MSGCLASS=Q,NOTIFY=&SYSUID,REGION=0M                       
+//* ADD DECIMAL                                                         
+//        JCLLIB ORDER=(D62WW.EZ34.STUDENT.PROCLIB)                     
+//STEP1   EXEC PROC=HLLASMA                                             
+//ASM.SYSIN DD *                                                        
+*********************************************************************** 
+* LAB502. For full details see the Exercise Guide.                      
+* In this lab, you will code instructions that                          
+* add decimal (packed) numbers                                          
+*********************************************************************** 
+LAB502   CSECT ,           COMMA REQUIRED IF COMMENT ON THIS STMT       
+* Standard z/OS program prolog (do not change these)                    
+* Ignore this for now, it will be explained in the next course          
+* 1. Save my caller's registers in their save area                      
+         STM   14,12,12(13)    Save caller's registers                  
+* 2. Establish my base register                                         
+         LARL  12,LAB502       Load the address of LAB502 into R12      
+         USING LAB502,12       Use R12 as base register                 
+* 3. Chain the save areas                                               
+         LA    15,SAVEAREA     R15 temporarily points to my save area   
+         ST    15,8(,13)       Caller's save area points to mine        
+         ST    13,SAVEAREA+4   My save area points to caller's          
+         LR    13,15           R13 points to my save area               
+**********************  Lab instructions ****************************** 
+* The comment lines below direct you to write instructions that         
+* add at (edit) decimal numbers.                                        
+* When you want to check your instructions, submit the job.             
+* This lab modifies and extends LAB501:                                 
+* Num1, Num2, and Num3 represent values with 2 decimal digits.          
+* After printing Num1, Num2, and Num3, you will add them,               
+* and then format and print the result.                                 
+* You will see the result at the end of the job listing.                
+* The instructions needed to make printing work have been               
+* written for you. Ignore them for the time being. You will             
+* learn about them in the next course.                                  
+*********************************************************************** 
+
+* The instructions from LAB501 have been entered for you.               
+* Note that now the numbers are formatted with two decimals             
+* The instructions for LAB502 follow after these                        
+                                                                        
+* Copy the characters 'Num1' to Out_name                                
+         MVC   Out_name,=C'Num1'                                        
+                                                                        
+* Format Num1 as '  13.82' in Out_val using the pattern PattN           
+         MVC   Out_val,PattN     Copy edit pattern to Out_val           
+         ED    Out_val,Num1      Edit number                            
+                                                                        
+* Print the line (do not change these)                                  
+         LA    1,Output         R1 points to print record               
+         CALL  PUT1             Call print routine                      
+         MVC   Line,Space       Clear the print line                    
+                                                                        
+* Copy the characters 'Num2' to Out_name                                
+         MVC   Out_name,=C'Num2'                                        
+                                                                        
+* Format Num2 as '  47.96' in Out_val using the pattern PattN           
+         MVC   Out_val,PattN     Copy edit pattern to Out_val           
+         ED    Out_val,Num2      Edit number                            
+                                                                        
+* Print the line (do not change these)                                  
+         LA    1,Output         R1 points to print record               
+         CALL  PUT1             Call print routine                      
+         MVC   Line,Space       Clear the print line                    
+                                                                        
+* Copy the characters 'Num3' to Out_name                                
+         MVC   Out_name,=C'Num3'                                        
+                                                                        
+* Format Num3 as '   2.40' in Out_val using the pattern PattN           
+         MVC   Out_val,PattN     Copy edit pattern to Out_val           
+         ED    Out_val,Num3      Edit number                            
+                                                                        
+* Print the line (do not change these)                                  
+         LA    1,Output         R1 points to print record               
+         CALL  PUT1             Call print routine                      
+         MVC   Line,Space       Clear the print line
+                                                                        
+* Submit this job now. The return code should be zero.                  
+* Scroll to the end of the SDSF job output to view the printed lines    
+*                                                                       
+* *** LAB502 instructions start here ***                                
+                                                                        
+* Scroll down to the Program data section to view the fields            
+* defined there, then come back here to continue the lab                
+                                                                        
+* Copy Num1 to Total                                                    
+* Enter your instruction here                                           
+                                                                        
+* Add Num2 to Total                                                     
+* Enter your instruction here                                           
+                                                                        
+* Add Num3 to Total                                                     
+* Enter your instruction here                                           
+                                                                        
+* Format Total as '**nn.nn' in Out_val using the pattern PattT          
+* Enter your instruction here (copy edit pattern to Out_val)            
+* Enter your instruction here (edit number)                             
+                                                                        
+* Print the line (do not change these)                                  
+         LA    1,Output         R1 points to print record               
+         CALL  PUT1             Call print routine                      
+         MVC   Line,Space       Clear the print line                    
+                                                                        
+* Submit this job now. The return code should be zero.                  
+* Scroll to the end of the SDSF job output to view the printed lines    
+*                                                                       
+**********************  End program  *********************************  
+Return   L     13,SAVEAREA+4          Reload R13 (caller's save area)   
+         LM    14,12,12(13)           Restore caller's registers,       
+         LHI   15,0                   set return code 0, and            
+         BR    14                     return                            
+**********************  Program data  ********************************  
+* Do not make changes to this area                                      
+                                                                        
+* Numbers to add     
+Num1     DC    PL3'13.82'                                               
+Num2     DC    PL3'47.96'                                               
+Num3     DC    PL3'2.40'                                                
+Total    DS    PL3                    Note no initial content           
+                                                                        
+PattN    DC    X'40 202120 4B 2020'   Edit pattern for numbers          
+PattT    DC    X'5C 202120 4B 2020'   Edit pattern for the total        
+                                                                        
+* Print line:                                                           
+Output   DS    0CL121   Print record                                    
+Space    DC    C' '     Print control (ignore for now)                  
+Line     DS    0CL120   Print line                                      
+         DC    CL10' '                                                  
+Out_name DS    CL4      Field name ('Num1', 'Num2', 'Num3')             
+         DC    CL10' '                                                  
+Out_val  DS    CL7      Num1/Num2/Num3/Total printed here               
+         DC    CL89' '                                                  
+                                                                        
+* Program save area (ignore for now)                                    
+SAVEAREA DS    18F      Standard register save area                     
+         END                                                            
+/*                                                                      
+//                                                                              

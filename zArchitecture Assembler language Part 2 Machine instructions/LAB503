@@ -1,0 +1,200 @@
+//TSOAA095 JOB 1EZ34G12,'LAB503',MSGLEVEL=(1,1),                        
+//    CLASS=E,MSGCLASS=Q,NOTIFY=&SYSUID,REGION=0M                       
+//* DECIMAL CALCULATION                                                 
+//        JCLLIB ORDER=(D62WW.EZ34.STUDENT.PROCLIB)                     
+//STEP1   EXEC PROC=HLLASMA                                             
+//ASM.SYSIN DD *                                                        
+*********************************************************************** 
+* LAB503. For full details see the Exercise Guide.                      
+* In this lab, you will code instructions that                          
+* perform a decimal claculation                                         
+*********************************************************************** 
+LAB503   CSECT ,           COMMA REQUIRED IF COMMENT ON THIS STMT       
+* Standard z/OS program prolog (do not change these)                    
+* Ignore this for now, it will be explained in the next course          
+* 1. Save my caller's registers in their save area                      
+         STM   14,12,12(13)    Save caller's registers                  
+* 2. Establish my base register                                         
+         LARL  12,LAB503       Load the address of LAB503 into R12      
+         USING LAB503,12       Use R12 as base register                 
+* 3. Chain the save areas                                               
+         LA    15,SAVEAREA     R15 temporarily points to my save area   
+         ST    15,8(,13)       Caller's save area points to mine        
+         ST    13,SAVEAREA+4   My save area points to caller's          
+         LR    13,15           R13 points to my save area               
+**********************  Lab instructions ****************************** 
+* The comment lines below direct you to write instructions that         
+* perform a decimal calculation.                                        
+* When you want to check your instructions, submit the job.             
+*                                                                       
+* Scroll down to the Program data section to view the fields            
+* defined there, then come back here to continue the lab                
+*                                                                       
+* We have the following fields defined:                                 
+* Unit_Price                                                            
+* Quantity                                                              
+* Gross_Price                                                           
+* Tax_Rate                                                              
+* Net_Price                                                             
+*                                                                       
+* You will perform the following calculation:                           
+*                                                                       
+* Gross_Price = Unit_Price * Quantity                                   
+*                                                                       
+* Net_Price = Gross_Price * Tax_Rate                                    
+*                                                                       
+* You will adjust decimals (shift) when necessary and                   
+* print (copy to the print line) all the input and                      
+* result fields                                                         
+*********************************************************************** 
+                                                                        
+* Part 1: Print the name and value of the three input fields            
+                                                                        
+* Print Unit_Price's name and value:                                    
+                                                                        
+* Copy the characters 'Unit_Price' to Out_name                          
+* Out_name is 11 characters long and 'Unit_Price' is 10                 
+* Code an instruction that copies 10 characters                         
+* Enter your instruction here                                           
+                                                                        
+* Format Unit_Price in Out_val using the pattern Patt52                 
+* Enter your instruction here (copy edit pattern to Out_val)            
+* Enter your instruction here (edit number)                             
+                                                                        
+* Print the line (do not change these)                                  
+         LA    1,Output         R1 points to print record               
+         CALL  PUT1             Call print routine                      
+         MVC   Line,Space       Clear the print line                    
+                                                                        
+* Submit this job now. The return code should be zero.                  
+* Scroll to the end of the SDSF job output to view the printed lines    
+                                                                        
+* Print Quantity's name and value:                                      
+                                                                        
+* Copy the characters 'Quantity' to Out_name                            
+* Out_name is 11 characters long and 'Quantity' is 8                    
+* Code an instruction that copies 8 characters                          
+* Enter your instruction here                                           
+                                                                        
+* Format Quantity in Out_val using the pattern Patt20                   
+* Enter your instruction here (copy edit pattern to Out_val)            
+* Enter your instruction here (edit number)                             
+                                                                        
+* Print the line (do not change these)                                  
+         LA    1,Output         R1 points to print record               
+         CALL  PUT1             Call print routine                      
+         MVC   Line,Space       Clear the print line                    
+                                                                        
+* Print Tax_Rate's name and value:                                      
+                                                                        
+* Copy the characters 'Tax_Rate' to Out_name                            
+* Out_name is 11 characters long and 'Tax_Rate' is 8                    
+* Code an instruction that copies 8 characters                          
+* Enter your instruction here                                           
+                                                                        
+* Format Tax_Rate in Out_val using the pattern Patt22                   
+* Enter your instruction here (copy edit pattern to Out_val)            
+* Enter your instruction here (edit number)                             
+                                                                        
+* Print the line (do not change these)                                  
+         LA    1,Output         R1 points to print record               
+         CALL  PUT1             Call print routine                      
+         MVC   Line,Space       Clear the print line                    
+                                                                        
+* Submit this job now. The return code should be zero.                  
+* Scroll to the end of the SDSF job output to view the printed lines    
+                                                                        
+* Part 2: Calculate Gross_Price = Unit_Price * Quantity                 
+                                                                        
+* Copy Unit_Price to Gross_Price                                        
+* Enter your instruction here                                           
+                                                                        
+* Multiply Gross_Price * Quantity (result in Gross_Price)               
+* Enter your instruction here                                           
+                                                                        
+* Print Gross_Price's name and value: 
+                                  
+* Copy the characters 'Gross_Price' to Out_name                         
+* Enter your instruction here                                           
+                                                                        
+* Format Gross_Price in Out_val using the pattern Patt52                
+* Enter your instruction here (copy edit pattern to Out_val)            
+* Enter your instruction here (edit number)                             
+                                                                        
+* Print the line (do not change these)                                  
+         LA    1,Output         R1 points to print record               
+         CALL  PUT1             Call print routine                      
+         MVC   Line,Space       Clear the print line                    
+                                                                        
+* Submit this job now. The return code should be zero.                  
+* Scroll to the end of the SDSF job output to view the printed lines    
+                                                                        
+* Part 3: Calculate Net_Price = Gross_Price * Tax_Rate                  
+                                                                        
+* First, copy Gross_Price to Net_Price                                  
+* Enter your instruction here                                           
+                                                                        
+* Multiply Net_Price * Tax_Rate (result in Net_Price)                   
+* Enter your instruction here                                           
+                                                                        
+* After multiplication, Net_Price is 115.0952                           
+* Round Net_Price to 115.10 (standard rounding)                         
+* Enter your instruction here                                           
+                                                                        
+* Print Net_Price's name and value:                                     
+                                                                        
+* Copy the characters 'Net_Price' to Out_name                           
+* Out_name is 11 characters long and 'Net_Price' is 9                   
+* Code an instruction that copies 9 characters                          
+* Enter your instruction here                                           
+                                                                        
+* Format Net_Price in Out_val using the pattern Patt52                  
+* Enter your instruction here (copy edit pattern to Out_val)            
+* Enter your instruction here (edit number)                             
+                                                                        
+* Print the line (do not change these)    
+         LA    1,Output         R1 points to print record               
+         CALL  PUT1             Call print routine                      
+         MVC   Line,Space       Clear the print line                    
+                                                                        
+* Submit this job now. The return code should be zero.                  
+* Scroll to the end of the SDSF job output to view the printed lines    
+                                                                        
+**********************  End program  *********************************  
+Return   L     13,SAVEAREA+4          Reload R13 (caller's save area)   
+         LM    14,12,12(13)           Restore caller's registers,       
+         LHI   15,0                   set return code 0, and            
+         BR    14                     return                            
+**********************  Program data  ********************************  
+* Do not make changes to this area                                      
+                                                                        
+Unit_Price  DC  PL5'11.89'                                              
+Quantity    DC  PL2'8'                                                  
+Tax_Rate    DC  PL2'1.21'                                               
+Gross_Price DC  PL5'0.00'             Unit_Price * Quantity             
+Net_Price   DC  PL5'0.00'             Gross_Price * Tax_Rate            
+                                                                        
+* Edit pattern for 5-byte numbers with 2 decimals                       
+Patt52   DC    X'40 20 202020 202120 4B 2020'                           
+                                                                        
+* Edit pattern for 2-byte integers (no decimals)                        
+Patt20   DC    X'40 40 404040 404040 202020'                            
+                                                                        
+* Edit pattern for 2-byte integers with 2 decimals                      
+Patt22   DC    X'40 404040 404040 20 4B 2020'                           
+                                                                        
+* Print line:                                                           
+Output   DS    0CL121   Print record                                    
+Space    DC    C' '     Print control (ignore for now)                  
+Line     DS    0CL120   Print line                                      
+         DC    CL10' '                                                  
+Out_name DC    CL11' '  Field name                                      
+         DC    CL10' '                                                  
+Out_val  DC    CL11' '  Field value (size of patterns)                  
+         DC    CL78' '                                                  
+                                                                        
+* Program save area (ignore for now)                                    
+SAVEAREA DS    18F      Standard register save area                     
+         END                                                            
+/*                                                                      
+//                                                                              

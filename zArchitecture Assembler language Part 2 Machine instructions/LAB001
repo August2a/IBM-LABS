@@ -1,0 +1,55 @@
+//TSOAA090 JOB 1EZ34G12,'LAB001',MSGLEVEL=(1,1),                        
+//    CLASS=E,MSGCLASS=Q,NOTIFY=&SYSUID,REGION=0M                       
+//* Defining binary integers                                            
+//        JCLLIB ORDER=(D62WW.EZ34.STUDENT.PROCLIB)                     
+//STEP1   EXEC PROC=ASMAC                                               
+//C.SYSIN   DD *                                                        
+LAB001   CSECT ,           COMMA REQUIRED IF COMMENT ON THIS STMT       
+*********************************************************************** 
+* LAB001:                                                               
+* Here we review a topic we covered in Part1: Defining binary integers. 
+* This program does not contain executable code, only data definitions. 
+**********************  Lab instructions ****************************** 
+* Each line following "Program data", below, contains instructions      
+* to write data definition statements.                                  
+* Follow the instructions and then submit this job.                     
+* Check the Assembler listing to verify that the definitions            
+* are as expected (see the Exercise Guide for details).                 
+                                                                        
+**********************  Program instructions  ************************  
+* There are no executable instructions                                  
+**********************************************************************  
+*                                                                       
+**********************  Program data  ********************************  
+* Replace each of the comment lines below by statements that:           
+                                                                        
+* Define a halfword labelled H1, containing decimal 100                 
+* Enter your instruction here           
+                                                            
+* Define a halfword labelled H2, containing decimal -1      
+* Enter your instruction here                               
+                                                            
+* Define a halfword labelled H3, containing decimal 32767   
+* Enter your instruction here                               
+                                                            
+* Define a fullword labelled F1, containing decimal 100     
+* Enter your instruction here                               
+                                                            
+* Define a fullword labelled F2, containing decimal -1      
+* Enter your instruction here                               
+                                                            
+* Define a fullword labelled F3, containing decimal 32768   
+* Enter your instruction here                               
+                                                            
+* Define a doubleword labelled D1, containing decimal 100   
+* Enter your instruction here                               
+                                                            
+* Define a doubleword labelled D2, containing decimal 0     
+* Enter your instruction here                               
+                                                            
+* Define a doubleword labelled D3, containing decimal -4095 
+* Enter your instruction here                               
+                                                            
+         END                                                
+/*   
+//                                                                              

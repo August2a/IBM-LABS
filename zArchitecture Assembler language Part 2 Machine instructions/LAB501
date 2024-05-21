@@ -1,0 +1,126 @@
+//TSOAA095 JOB 1EZ34G12,'LAB501',MSGLEVEL=(1,1),                        
+//    CLASS=E,MSGCLASS=Q,NOTIFY=&SYSUID,REGION=0M                       
+//* FORMAT (EDIT) DECIMAL                                               
+//        JCLLIB ORDER=(D62WW.EZ34.STUDENT.PROCLIB)                     
+//STEP1   EXEC PROC=HLLASMA                                             
+//ASM.SYSIN DD *                                                        
+*********************************************************************** 
+* LAB501. For full details see the Exercise Guide.                      
+* In this lab, you will code instructions that                          
+* edit decimal (packed) numbers                                         
+*********************************************************************** 
+LAB501   CSECT ,           COMMA REQUIRED IF COMMENT ON THIS STMT       
+* Standard z/OS program prolog (do not change these)                    
+* Ignore this for now, it will be explained in the next course          
+* 1. Save my caller's registers in their save area                      
+         STM   14,12,12(13)    Save caller's registers                  
+* 2. Establish my base register                                         
+         LARL  12,LAB501       Load the address of LAB501 into R12      
+         USING LAB501,12       Use R12 as base register                 
+* 3. Chain the save areas                                               
+         LA    15,SAVEAREA     R15 temporarily points to my save area   
+         ST    15,8(,13)       Caller's save area points to mine        
+         ST    13,SAVEAREA+4   My save area points to caller's          
+         LR    13,15           R13 points to my save area               
+**********************  Lab instructions ****************************** 
+* The comment lines below direct you to write instructions that         
+* format (edit) decimal numbers.                                        
+* When you want to check your instructions, submit the job.             
+* Like in the previous Unit 4 labs (LAB4xx), you will copy data         
+* to a print line, and the program will print it.                       
+* You will see the result at the end of the job listing.                
+* The instructions needed to make printing work have been               
+* written for you. Ignore them for the time being. You will             
+* learn about them in the next course.                                  
+*********************************************************************** 
+                                                                        
+* Scroll down to the Program data section to view the fields            
+* defined there, then come back here to continue the lab
+                                                                        
+* In this lab, you will print a field's name and its value              
+* The printed lines shoud look like this (without the asterisk):        
+*         Num1            1382                                          
+*         Num2            4796                                          
+*         Num3             240                                          
+                                                                        
+* 1. Print Num1's name and value:                                       
+                                                                        
+* Copy the characters 'Num1' to Out_name                                
+* Enter your instruction here                                           
+                                                                        
+* Format Num1 as '  1382' in Out_val using the pattern PattN            
+* Enter your instruction here (copy edit pattern to Out_val)            
+* Enter your instruction here (edit number)                             
+                                                                        
+* Print the line (do not change these)                                  
+         LA    1,Output         R1 points to print record               
+         CALL  PUT1             Call print routine                      
+         MVC   Line,Space       Clear the print line                    
+                                                                        
+* Submit this job now. The return code should be zero.                  
+* Scroll to the end of the SDSF job output to view the printed line     
+* You should see (without the asterisk):                                
+*         Num1            1382                                          
+                                                                        
+* 2. Print Num2's name and value:                                       
+                                                                        
+* Copy the characters 'Num2' to Out_name                                
+* Enter your instruction here                                           
+                                                                        
+* Format Num2 as '  4796' in Out_val using the pattern PattN            
+* Enter your instruction here (copy edit pattern to Out_val)            
+* Enter your instruction here (edit number)                             
+                                                                        
+* Print the line (do not change these)                                  
+         LA    1,Output         R1 points to print record               
+         CALL  PUT1             Call print routine                      
+         MVC   Line,Space       Clear the print line                    
+                                                                        
+* Optional. Submit this job now. The return code should be zero.        
+* Scroll to the end of the SDSF job output to view the printed lines    
+                                                                        
+* 3. Print Num3's name and value:                                       
+                                                                        
+* Copy the characters 'Num3' to Out_name                                
+* Enter your instruction here                                           
+                                                                        
+* Format Num3 as '   240' in Out_val using the pattern PattN            
+* Enter your instruction here (copy edit pattern to Out_val)            
+* Enter your instruction here (edit number)                             
+                                                                        
+* Print the line (do not change these)                                  
+         LA    1,Output         R1 points to print record               
+         CALL  PUT1             Call print routine                      
+                                                                        
+* Submit this job now. The return code should be zero.                  
+* Scroll to the end of the SDSF job output to view the printed lines    
+**********************  End program  *********************************  
+Return   L     13,SAVEAREA+4          Reload R13 (caller's save area)   
+         LM    14,12,12(13)           Restore caller's registers,       
+         LHI   15,0                   set return code 0, and            
+         BR    14                     return                            
+**********************  Program data  ********************************  
+* Do not make changes to this area                                      
+                                                                        
+* Numbers to format                                                     
+Num1     DC    PL3'1382'                                                
+Num2     DC    PL3'4796'                                                
+Num3     DC    PL3'240'                                                 
+                                                                        
+PattN    DC    X'40 2020202020'                                         
+                                                                        
+* Print line:                                                           
+Output   DS    0CL121   Print record                                    
+Space    DC    C' '     Print control (ignore for now)                  
+Line     DS    0CL120   Print line                                      
+         DC    CL10' '                                                  
+Out_name DS    CL4      Field name ('Num1', 'Num2', 'Num3')             
+         DC    CL10' '                                                  
+Out_val  DS    CL6      Num1/Num2/Num3 printed here                     
+         DC    CL90' '                                                  
+                                                                        
+* Program save area (ignore for now)                                    
+SAVEAREA DS    18F      Standard register save area                     
+         END                                                            
+/*                                                                      
+//                                                                              

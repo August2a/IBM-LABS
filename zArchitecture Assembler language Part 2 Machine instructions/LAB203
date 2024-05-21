@@ -1,0 +1,86 @@
+//TSOAA092 JOB 1EZ34G12,'LAB203',MSGLEVEL=(1,1),                        
+//    CLASS=E,MSGCLASS=Q,NOTIFY=&SYSUID,REGION=0M                       
+//* MULTIPLY and DIVIDE instructions                                    
+//        JCLLIB ORDER=(D62WW.EZ34.STUDENT.PROCLIB)                     
+//STEP1   EXEC PROC=HLLASMA                                             
+//ASM.SYSIN DD *                                                        
+*********************************************************************** 
+* LAB203. For full details see the Exercise Guide.                      
+* In this lab, you will code MULTIPLY and DIVIDE instructions           
+*********************************************************************** 
+LAB203   CSECT ,           COMMA REQUIRED IF COMMENT ON THIS STMT       
+* Establish our base register (do not change these)                     
+         LARL  12,LAB203       Load the address of LAB203 into R12      
+         USING LAB203,12       Use R12 as base register                 
+**********************  Lab instructions ****************************** 
+* The comment lines below direct you to write MULTIPLY and              
+* DIVIDE instructions.                                                  
+* When you want to check your instructions, submit the job.             
+* This job abends with S0C1 (operation exception). This is intended.    
+* On abend, the system displays the contents of registers.              
+* This lets you check if your instructions worked as expected.          
+                                                                        
+*********************************************************************** 
+* In this lab we will calculate 3/4 of a number, by first               
+* multiplying it by 3, then dividing by 4.                              
+                                                                        
+* We will calculate 100 * 3/4 = 75.                                     
+* Feel free to try different values later.                              
+                                                                        
+* Part 1: Multiplication                                                
+                                                                        
+* Use instructions that operate on                                      
+* the LOW HALVES OF REGISTERS                                           
+                                                                        
+* Set the multiplicand (100) in the R2-R3 register pair                 
+                                                                        
+* Load 100 into the multiplicand register                               
+* (use an IMMEDIATE OPERAND instruction)                                
+* Enter your instruction here                                           
+                                                                        
+* Multiply the R2-R3 pair by 3                                          
+* (use a literal for the 3 multiplier)                                  
+* Enter your instruction here                                           
+                                                                        
+* Submit this job now and check R2-R3                                   
+                                                                        
+* Part 2: Division                                                      
+                                                                        
+* Divide the R2-R3 pair by 4                                            
+* (use a literal for the 4 divisor)                                     
+* Enter your instruction here                                           
+                                                                        
+* Submit this job now and check R2-R3                                   
+                                                                        
+* Part 3: 64-bit multiplication and division                            
+                                                                        
+* In this part, we will calculate                                       
+* 100,000,000,000 * 3/4 = 75,000,000,000                                
+                                                                        
+* Set the multiplicand (100,000,000,000) in R5                          
+                                                                        
+* Load 100,000,000,000 into the multiplicand register                   
+* (use a literal for the second operand)                                
+* Enter your instruction here                                           
+                                                                        
+* Multiply R5 by 3                                                      
+* Use MULTIPLY SINGLE to place the result in R5 only                    
+* (use an IMMEDIATE value for the 3 multiplier)                         
+* Enter your instruction here                                           
+                                                                        
+* Submit this job now and check R5                                      
+                                                                        
+* Divide R5 by 4                                                        
+* Use DIVIDE SINGLE                                                     
+* (use a literal for the 4 divisor)                                     
+* Enter your instruction here                                           
+* Submit this job now and check R4-R5                                   
+                                                                        
+**********************  End program  *********************************  
+         DC    H'0'          Invalid opcode causes abend S0C1           
+**********************  Program data  ********************************  
+* There are no data definitions in this program                         
+                                                                        
+         END                                                            
+/*                                                                      
+//                                                                                                                                    

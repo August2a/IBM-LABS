@@ -1,0 +1,58 @@
+//TSOAA091 JOB 1EZ34G12,'LAB102',MSGLEVEL=(1,1),                        
+//    CLASS=E,MSGCLASS=Q,NOTIFY=&SYSUID,REGION=0M                       
+//* LOAD instructions                                                   
+//        JCLLIB ORDER=(D62WW.EZ34.STUDENT.PROCLIB)                     
+//STEP1   EXEC PROC=HLLASMA                                             
+//ASM.SYSIN DD *                                                        
+*********************************************************************** 
+* LAB102. For full details see the Exercise Guide.                      
+* In this lab, you will code variants of LOAD that operate on           
+* the low half of registers.                                            
+*********************************************************************** 
+LAB102   CSECT ,           COMMA REQUIRED IF COMMENT ON THIS STMT       
+* DO NOT establish our base register (do not change these)              
+* Note the next two instructions are commented out: the program         
+* doesn't have a base register. If you submit the program as is,        
+* the assembly fails.                                                   
+*        LARL  12,LAB102       Load the address of LAB102 into R12      
+*        USING LAB102,12       Use R12 as base register                 
+**********************  Lab instructions ****************************** 
+* In this lab, you will change the LOAD instructions by others          
+* that don't need a base register.                                      
+* The comment lines below direct you to write different LOAD            
+* instructions.                                                         
+* When you want to check your instructions, submit the job.             
+* This job abends with S0C1 (operation exception). This is intended.    
+* On abend, the system displays the contents of registers.              
+* This lets you check if your LOAD instructions worked as expected.     
+                                                                        
+*********************************************************************** 
+* Part 1: Relative addressing                                           
+                                                                        
+* Replace this instruction by its RELATIVE ADDRESSING equivalent        
+         L     2,=F'170'                                                
+                                                                        
+* Replace this instruction by its RELATIVE ADDRESSING equivalent        
+         LH    3,=H'4095'                                               
+                                                                        
+* Leave as is - RR instructions do not need a base register             
+         LR    4,3                                                      
+                                                                        
+* Part 2: Immediate operands                                            
+                                                                        
+* Replace this instruction by its IMMEDIATE OPERAND equivalent          
+         LY    5,=F'187'                                                
+                                                                        
+* Replace this instruction by its IMMEDIATE OPERAND equivalent          
+         LHY   6,=H'2048'                                               
+                                                                        
+* Submit this job now to see the contents of R2 through R6              
+                                                                        
+**********************  End program  *********************************  
+         DC    H'0'          Invalid opcode causes abend S0C1           
+**********************  Program data  ********************************  
+* There are no data definitions in this program                         
+                                                                        
+         END                                                            
+/*                                                                      
+//                                                                      

@@ -1,0 +1,68 @@
+//TSOAA092 JOB 1EZ34G12,'LAB201',MSGLEVEL=(1,1),                        
+//    CLASS=E,MSGCLASS=Q,NOTIFY=&SYSUID,REGION=0M                       
+//* ADD and SUBTRACT instructions                                       
+//        JCLLIB ORDER=(D62WW.EZ34.STUDENT.PROCLIB)                     
+//STEP1   EXEC PROC=HLLASMA                                             
+//ASM.SYSIN DD *                                                        
+*********************************************************************** 
+* LAB201. For full details see the Exercise Guide.                      
+* In this lab, you will code variants of ADD and SUBTRACT that          
+* operate the low half of registers.                                    
+*********************************************************************** 
+LAB201   CSECT ,           COMMA REQUIRED IF COMMENT ON THIS STMT       
+* Establish our base register (do not change these)                     
+         LARL  12,LAB201       Load the address of LAB201 into R12      
+         USING LAB201,12       Use R12 as base register                 
+**********************  Lab instructions ****************************** 
+* The comment lines below direct you to write different ADD             
+* or SUBTRACT instructions.                                             
+* When you want to check your instructions, submit the job.             
+* This job abends with S0C1 (operation exception). This is intended.    
+* On abend, the system displays the contents of registers.              
+* This lets you check if your instructions worked as expected.          
+                                                                        
+*********************************************************************** 
+* Part 1: "Original" instructions                                       
+                                                                        
+* The first three instructions have been written for you:               
+                                                                        
+* Load a fullword containing 40960 (X'A000') into R2 low half           
+         L     2,=F'40960'                                              
+                                                                        
+* Add a fullword containing 2730 (X'AAA') to R2 low half                
+         A     2,=F'2730'   40960+2730=43690 (X'AAAA')                  
+                                                                        
+* Copy R2 to R3                                                         
+         LR    3,2                                                      
+                                                                        
+* Subtract a halfword containing 8738 (X'2222') from R3 low half       
+         SH    3,=H'8738'   43690-8738=34952 (X'8888')                  
+                                                                        
+* You can submit this job now and check                                 
+* the contents of R2 and R3                                             
+                                                                        
+* Part 2: Same as above, but using IMMEDIATE OPERAND                    
+*         instructions (note registers are different)                   
+                                                                        
+* Load a fullword containing 40960 (X'A000') into R4 low half           
+* Enter your instruction here                                           
+                                                                        
+* Add a fullword containing 2730 (X'AAA') to R4 low half                
+* Enter your instruction here                                           
+                                                                        
+* Copy R4 to R5 (use LR)                                                
+* Enter your instruction here                                           
+                                                                        
+* Subtract a halfword containing 8738 (X'2222') from R5 low half        
+* Enter your instruction here                                           
+                                                                        
+* Submit this job now to see the contents of R2 through R5              
+                                                                        
+**********************  End program  *********************************  
+         DC    H'0'          Invalid opcode causes abend S0C1           
+**********************  Program data  ********************************  
+* There are no data definitions in this program                         
+                                                                        
+         END                                                            
+/*                                                                      
+//                                                                      

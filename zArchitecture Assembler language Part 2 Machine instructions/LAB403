@@ -1,0 +1,97 @@
+//TSOAA094 JOB 1EZ34G12,'LAB403',MSGLEVEL=(1,1),                        
+//    CLASS=E,MSGCLASS=Q,NOTIFY=&SYSUID,REGION=0M                       
+//* MOVE CHARACTERS                                                     
+//        JCLLIB ORDER=(D62WW.EZ34.STUDENT.PROCLIB)                     
+//STEP1   EXEC PROC=HLLASMA                                             
+//ASM.SYSIN DD *                                                        
+*********************************************************************** 
+* LAB403. For full details see the Exercise Guide.                      
+* In this lab, you will code instructions that move characters.         
+*********************************************************************** 
+LAB403   CSECT ,           COMMA REQUIRED IF COMMENT ON THIS STMT       
+* Standard z/OS program prolog (do not change these)                    
+* Ignore this for now, it will be explained in the next course          
+* 1. Save my caller's registers in their save area                      
+         STM   14,12,12(13)    Save caller's registers                  
+* 2. Establish my base register                                         
+         LARL  12,LAB403       Load the address of LAB403 into R12      
+         USING LAB403,12       Use R12 as base register                 
+* 3. Chain the save areas                                               
+         LA    15,SAVEAREA     R15 temporarily points to my save area   
+         ST    15,8(,13)       Caller's save area points to mine        
+         ST    13,SAVEAREA+4   My save area points to caller's          
+         LR    13,15           R13 points to my save area               
+**********************  Lab instructions ****************************** 
+* The comment lines below direct you to write instructions that         
+* move (actually, copy) characters to a print line.                     
+* When you want to check your instructions, submit the job.             
+* Unlike the previous labs, this one does not abend.                    
+* You will copy data to a print line, and the program will              
+* print it. You will see the result at the end of the job listing.      
+* The instructions needed to make printing work have been               
+* written for you. Ignore them for the time being. You will             
+* learn about them in the next course.                                  
+*********************************************************************** 
+                                                                        
+* Scroll down to the Program data section to view the fields            
+* defined there, then come back here to continue the lab         
+
+* In this lab, you will print the employee date of birth                
+* in the format yyyy-mm-dd                                              
+                                                                        
+* The first two fields are the same as in the last lab                  
+* and have been completed for you                                       
+* Copy Employee name to Line+10                                         
+         MVC   Line+10(L'Emp_name),Emp_name                             
+                                                                        
+* Copy Employee number to Line+40                                       
+         MVC   Line+40(L'Emp_num),Emp_num                               
+                                                                        
+* Optional: submit the job to verify that employee name                 
+*           and number print correctly                                  
+                                                                        
+* Copy Employee date of birth to Line+50                                
+* in the format yyyy-mm-dd                                              
+* Enter your instruction here (for the year)                            
+* Enter your instruction here (for the '-' separator)                   
+* Enter your instruction here (for the month)                           
+* Enter your instruction here (for the '-' separator)                   
+* Enter your instruction here (for the day)                             
+                                                                        
+* Submit this job now. The return code should be zero.                  
+* Scroll to the end of the SDSF job output to view the printed line     
+                                                                        
+***************** Do not make changes below this line ****************  
+* Print the line                                                        
+         LA    1,Output         R1 points to print record               
+         CALL  PUT1             Call print routine                      
+                                                                        
+**********************  End program  *********************************  
+Return   L     13,SAVEAREA+4          Reload R13 (caller's save area)   
+         LM    14,12,12(13)           Restore caller's registers,       
+         LHI   15,0                   set return code 0, and            
+         BR    14                     return                            
+**********************  Program data  ********************************  
+* Do not make changes to this area                                      
+                                                                        
+* Employee record:  
+* you will copy these fields to the print line below                    
+Employee DC    0CL34            Employee:                               
+Emp_name DC    CL20'Joan Smith'  Name                                   
+Emp_num  DC    CL6'007777'       Number                                 
+Emp_DOB  DC    0CL8              Date of birth:                         
+DOB_yyyy DC    C'2001'            Year                                  
+DOB_mm   DC    C'11'              Month                                 
+DOB_dd   DC    C'25'              Day                                   
+                                                                        
+* Print line:                                                           
+Output   DS    0CL121   Print record                                    
+Space    DC    C' '     Print control (ignore for now)                  
+Line     DS    0CL120   Print line                                      
+         DC    120C' '  Initial print line contents                     
+                                                                        
+* Program save area (ignore for now)                                    
+SAVEAREA DS    18F      Standard register save area                     
+         END                                                            
+/*                                                                      
+//                                                                              

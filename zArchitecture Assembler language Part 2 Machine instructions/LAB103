@@ -1,0 +1,82 @@
+//TSOAA091 JOB 1EZ34G12,'LAB103',MSGLEVEL=(1,1),                        
+//    CLASS=E,MSGCLASS=Q,NOTIFY=&SYSUID,REGION=0M                       
+//* LOAD instructions                                                   
+//        JCLLIB ORDER=(D62WW.EZ34.STUDENT.PROCLIB)                     
+//STEP1   EXEC PROC=HLLASMA                                             
+//ASM.SYSIN DD *                                                        
+*********************************************************************** 
+* LAB103. For full details see the Exercise Guide.                      
+* In this lab, you will code variants of LOAD that operate on           
+* whole (64-bit) registers (instructions with "G" in the mnemonic)      
+*********************************************************************** 
+LAB103   CSECT ,           COMMA REQUIRED IF COMMENT ON THIS STMT       
+* Establish our base register (do not change these)                     
+         LARL  12,LAB103       Load the address of LAB103 into R12      
+         USING LAB103,12       Use R12 as base register                 
+**********************  Lab instructions ****************************** 
+* The comment lines below direct you to write different LOAD            
+* instructions.                                                         
+* When you want to check your instructions, submit the job.             
+* This job abends with S0C1 (operation exception). This is intended.    
+* On abend, the system displays the contents of registers.              
+* This lets you check if your LOAD instructions worked as expected.     
+                                                                        
+*********************************************************************** 
+* Part 1: Code LONG DISPLACEMENT instructions to:                       
+                                                                        
+* Load the doubleword labelled DW1 into R2                              
+* (You must also scroll down to the Program data area                   
+*  and define DW1)                                                      
+* Enter your instruction here                                           
+                                                                        
+* Load the fullword labelled F1 into R3 (64-bit)                        
+* (Scroll down to the Program data area to define F1)                   
+* Enter your instruction here                                           
+                                                                        
+* Load the halfword labelled H1 into R4 (64-bit)                        
+* (Scroll down to the Program data area to define H1)                   
+* Enter your instruction here                                           
+
+* Submit this job now to see the contents of R2, R3, and R4.            
+                                                                        
+* Part 2: Code RELATIVE ADDRESSING instructions to:                     
+                                                                        
+* Load the doubleword labelled DW1 into R5                              
+* Enter your instruction here                                           
+                                                                        
+* Load the fullword labelled F1 into R6 (64-bit)                        
+* Enter your instruction here                                           
+                                                                        
+* Load the halfword labelled H1 into R7 (64-bit)                        
+* Enter your instruction here                                           
+                                                                        
+* You can submit this job now and see the contents of R5, R6, and R7.   
+* (They should be the same as the contents of R2, R3, and R4.)          
+                                                                        
+* Part 3: Code IMMEDIATE OPERAND instructions to:                       
+                                                                        
+* Load a fullword containing -131072 into R8 (64-bit)                   
+* Enter your instruction here                                           
+                                                                        
+* Load a halfword containing 0 into R9 (64-bit)                         
+* Enter your instruction here                                           
+                                                                        
+* Submit this job now to see the contents of R2 through R9              
+                                                                        
+**********************  End program  *********************************  
+         DC    H'0'          Invalid opcode causes abend S0C1           
+**********************  Program data  ********************************  
+* Replace each of the comment lines below by statements that:           
+                                                                        
+* Define a doubleword labelled DW1, containing decimal 100,000,000,000  
+* Enter your instruction here                                           
+                                                                        
+* Define a fullword labelled F1, containing decimal -1                  
+* Enter your instruction here                                           
+                                                                        
+* Define a halfword labelled H1, containing decimal -32768   
+* Enter your instruction here                                           
+                                                                        
+         END                                                            
+/*                                                                      
+//                                                                          

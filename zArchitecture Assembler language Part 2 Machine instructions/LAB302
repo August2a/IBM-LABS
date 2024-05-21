@@ -1,0 +1,73 @@
+//TSOAA093 JOB 1EZ34G12,'LAB302',MSGLEVEL=(1,1),                        
+//    CLASS=E,MSGCLASS=Q,NOTIFY=&SYSUID,REGION=0M                       
+//* COMPARE, JUMP, and BRANCH instructions                              
+//        JCLLIB ORDER=(D62WW.EZ34.STUDENT.PROCLIB)                     
+//STEP1   EXEC PROC=HLLASMA                                             
+//ASM.SYSIN DD *                                                        
+*********************************************************************** 
+* LAB302. For full details see the Exercise Guide.                      
+* In this lab, you will code COMPARE and JUMP instructions              
+*********************************************************************** 
+LAB302   CSECT ,           COMMA REQUIRED IF COMMENT ON THIS STMT       
+* This program has no base register (do not change these)               
+* ****** LARL  12,LAB302       Load the address of LAB302 into R12      
+* ****** USING LAB302,12       Use R12 as base register                 
+**********************  Lab instructions ****************************** 
+* This is the solution to LAB301, with the instructions that            
+* establish the base register commented out.                            
+* If you submit this job as is, you will get an Assembler error,        
+* as many instructions below need a base register.                      
+                                                                        
+* Fix the problem by replacing the instructions that fail               
+* assembly by others that do not need base registers                    
+                                                                        
+* Hint: use RELATIVE ADDRESSING variants of LOAD                        
+*       and JUMP instead of BRANCH                                      
+                                                                        
+* Load R2 with the fullword at F100                                     
+Step1    L     2,F100   R2 = 100                                        
+                                                                        
+* Compare R2 with the fullword at F55                                   
+* then branch to Step2 if R2 > F55                                      
+         C     2,F55                                                    
+         BH    Step2                                                    
+                                                                        
+         LHI   15,1     Indicate we ended after Step1                   
+         B     Return                                                   
+                                                                        
+Step2    LHI   3,0      R3 = 0                                          
+                                                                        
+* Compare R3 with the halfword at H1000                                 
+* then branch to Step3 if R3 < H1000                                    
+         CH    3,H1000                                                  
+         BL    Step3                                                    
+                                                                        
+         LHI   15,2     Indicate we ended after Step2                   
+         B     Return                                                   
+                                                                        
+Step3    L     4,F55    R4 = 55                                         
+         LH    5,H55    R5 = 55                                         
+                                                                        
+* Compare R4 with R5                                                    
+* then branch to Step4 if R4 = R5                                       
+         CR    4,5                                                      
+         BE    Step4                                                    
+                                                                        
+         LHI   15,3     Indicate we ended after Step3                   
+         B     Return                                                   
+                                                                        
+Step4    LHI   15,0     Indicate successful completion                  
+                                                                        
+* Submit this job now. The return code should be zero.                  
+                                                                        
+**********************  End program  *********************************  
+Return   BR    14       Return to caller (return code in R15)           
+**********************  Program data  ********************************  
+F100     DC    F'100'                                                   
+F55      DC    F'55'                                                    
+H1000    DC    H'1000'                                                  
+H55      DC    H'55'                                                    
+                                                                        
+         END                                                            
+/*                                                                      
+//                                                                      

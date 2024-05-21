@@ -1,0 +1,43 @@
+//TSOAA09D JOB 1EZ34G12,'DEMO1 ',MSGLEVEL=(1,1),               
+//    CLASS=E,MSGCLASS=Q,NOTIFY=&SYSUID,REGION=0M              
+//* SIMPLE DEMO PROGRAM                                        
+//        JCLLIB ORDER=(D62WW.EZ34.STUDENT.PROCLIB)            
+//STEP1   EXEC PROC=ASMACLG                                    
+//C.SYSIN   DD *                                                                
+DEMO1    CSECT ,           COMMA REQUIRED IF COMMENT ON THIS STMT      
+***********************************************************************
+* DEMO1:                                                               
+* 1. Establish register 12 (R12) as base register                      
+* 2. Load a halfword containing 10 to R3                               
+* 3. Copy R3 to R15                                                    
+* 4. Exit (R15 contains the return code)                               
+                                                                       
+**********************  Lab instructions ******************************
+* 1. Submit this unchanged. You should see this message when the       
+* job ends: "DEMO1    ENDED AT ESSMVS1 MAXCC=0010"                     
+* Note 0010 is the content of R15                                      
+* 2. Change the number to other small (less than 100)                  
+* number and resubmit a few times.                                     
+* Optional experiments:                                                
+* 3. What do you see when the number is 4095, 4096, or 4097? Why?      
+* 4. What do you see when the number is -1 or -2? Why?                  
+                                                                       
+**********************  Program instructions  ************************ 
+* Standard prolog for a z/OS CSECT omitted                             
+***********************************************************************
+* To keep the program as simple as possible,                           
+* the saving of caller's registers (called the standard prolog)        
+* is omitted for now (it will be included in later labs).              
+* It is NOT RECOMMENDED PRACTICE to omit the prolog!                   
+***********************************************************************
+         LARL  12,DEMO1               Load the address of DEMO1 in R12 
+         USING DEMO1,12               Use R12 as base register         
+         LH    3,Int1                 Load Int1 into R3                
+         LR    15,3                   Copy R3 to R15 (sets return code)
+         BR    14                     End program (return to caller)   
+                                                                       
+**********************  Program data  ******************************** 
+Int1     DC    H'10'                                                   
+         END                                                           
+/*                                                                     
+//                                                                              

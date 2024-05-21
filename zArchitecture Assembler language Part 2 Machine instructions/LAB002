@@ -1,0 +1,72 @@
+//TSOAA090 JOB 1EZ34G12,'LAB002',MSGLEVEL=(1,1),                        
+//    CLASS=E,MSGCLASS=Q,NOTIFY=&SYSUID,REGION=0M                       
+//* Defining character, hexadecimal, and bit strings                    
+//        JCLLIB ORDER=(D62WW.EZ34.STUDENT.PROCLIB)                     
+//STEP1   EXEC PROC=ASMAC                                               
+//C.SYSIN   DD *                                                                
+LAB002   CSECT ,           COMMA REQUIRED IF COMMENT ON THIS STMT       
+*********************************************************************** 
+* LAB002:                                                               
+* Another topic from Part 1: Defining character, hex, and bit strings.  
+* This program does not contain executable code, only data definitions. 
+**********************  Lab instructions ****************************** 
+* Each line following "Program data", below, contains instructions      
+* to write data definition statements.                                  
+* Follow the instructions and then submit this job.                     
+* Check the Assembler listing to verify that the definitions            
+* are as expected (see the Exercise Guide for details).                 
+                                                                        
+**********************  Program instructions  ************************  
+* There are no executable instructions                                  
+*********************************************************************** 
+*                                                                       
+**********************  Program data  ********************************  
+* Replace each of the comment lines below by statements that:           
+                                                                        
+* Define field labelled HI, containing the characters 'Hello'           
+* Enter your instruction here     
+                                                            
+* Same as above, but this time                              
+* the label is HI2 and the field is 10 bytes long           
+* Enter your instruction here                               
+                                                            
+* Use the Length (L) attribute to define a 4-byte field     
+* without label and containing the characters 'XXXYYYZZZ'   
+* Q1. What happens?                                         
+* Enter your instruction here                               
+                                                            
+* Define a field labelled C1 containg the charater '*'      
+* repeated 8 times                                          
+* Enter your instruction here                               
+                                                            
+* Define a field labelled C2 containg 8 charaters '*'       
+* Enter your instruction here                               
+                                                            
+* Define a 2-byte field without label                       
+* repeated 3 times and                                      
+* containg one charater '*'                                 
+* Enter your instruction here                               
+                                                            
+* Define a field labelled X1, containing hexadecimal A000   
+* Enter your instruction here                               
+                                                            
+* Define a halfword labelled H1,                            
+* containing decimal -24576                                 
+* containing decimal -24576                                         
+* Q2. Is it the same as X1?                                         
+* Enter your instruction here                                       
+                                                                    
+* Define a field labelled X2, containing hexadecimal 1A2B           
+* Enter your instruction here                                       
+                                                                    
+* Define a bit string labelled B2, with the same contents as X2     
+* Enter your instruction here                                       
+                                                                    
+* Define a one-byte bit string labelled B3,                         
+* containing B'1111 0000' and aligned on fullword boundary          
+* Enter your instruction here (for the fullword alignment)          
+* Enter your instruction here (for the definition)                  
+                                                                    
+         END                                                        
+/*                                                                  
+//                                                                              

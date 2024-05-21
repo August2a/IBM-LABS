@@ -1,0 +1,78 @@
+//TSOAA093 JOB 1EZ34G12,'LAB301',MSGLEVEL=(1,1),                        
+//    CLASS=E,MSGCLASS=Q,NOTIFY=&SYSUID,REGION=0M                       
+//* COMPARE, JUMP, and BRANCH instructions                              
+//        JCLLIB ORDER=(D62WW.EZ34.STUDENT.PROCLIB)                     
+//STEP1   EXEC PROC=HLLASMA                                             
+//ASM.SYSIN DD *                                                        
+*********************************************************************** 
+* LAB301. For full details see the Exercise Guide.                      
+* In this lab, you will code COMPARE and BRANCH instructions            
+*********************************************************************** 
+LAB301   CSECT ,           COMMA REQUIRED IF COMMENT ON THIS STMT       
+* Establish our base register (do not change these)                     
+         LARL  12,LAB301       Load the address of LAB301 into R12      
+         USING LAB301,12       Use R12 as base register                 
+**********************  Lab instructions ****************************** 
+* The comment lines below direct you to write different COMPARE,        
+* JUMP, or BRANCH instructions.                                         
+* When you want to check your instructions, submit the job.             
+* In this job, you will guide the program through a number of steps.    
+* The program ends with return code 0 if successful.                    
+* A non-zero return code indicates where the program went wrong.        
+                                                                        
+*********************************************************************** 
+* In this lab, code instructions that USE A BASE REGISTER               
+* and operate on the LOW HALVES OF REGISTERS                            
+                                                                        
+* Scroll down to the Program data section to view the fields            
+* defined there, then come back to continue the lab here                
+                                                                        
+* Some instructions have already been written for you                   
+                                                                        
+* Load R2 with the fullword at F100                                     
+Step1    L     2,F100   R2 = 100                                        
+                                                                        
+* Compare R2 with the fullword at F55                                   
+* then branch to Step2 if R2 > F55                                      
+* Enter your COMPARE instruction here                                   
+* Enter your BRANCH instruction here                                    
+                                                                        
+         LHI   15,1     Indicate we ended after Step1                   
+         B     Return                                                   
+                                                                        
+Step2    LHI   3,0      R3 = 0                                          
+                                                                        
+* Compare R3 with the halfword at H1000                                 
+* then branch to Step3 if R3 < H1000                                    
+* Enter your COMPARE instruction here                                   
+* Enter your BRANCH instruction here                                    
+                                                                        
+         LHI   15,2     Indicate we ended after Step2                   
+         B     Return                                                   
+                                                                        
+Step3    L     4,F55    R4 = 55                                         
+         LH    5,H55    R4 = 55                                         
+                                                                        
+* Compare R4 with R5                                                    
+* then branch to Step4 if R4 = R5                                       
+* Enter your COMPARE instruction here                                   
+* Enter your BRANCH instruction here                                    
+                                                                        
+         LHI   15,3     Indicate we ended after Step3                   
+         B     Return                                                   
+                                                                        
+Step4    LHI   15,0     Indicate successful completion                  
+                                                                        
+* Submit this job now. The return code should be zero.                  
+                                                                        
+**********************  End program  *********************************  
+Return   BR    14       Return to caller (return code in R15)           
+**********************  Program data  ********************************  
+F100     DC    F'100'                                                   
+F55      DC    F'55'                                                    
+H1000    DC    H'1000'                                                  
+H55      DC    H'55'                                                    
+                                                                        
+         END                                                            
+/*  
+//                                                                    
